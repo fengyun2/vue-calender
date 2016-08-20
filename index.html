@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1">
+    <title>日历</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/vue-calender.css">
+</head>
+
+<body>
+    <div id="calendar">
+
+        <!--年份 月份-->
+        <div class="month">
+            <ul>
+                <li class="arrow" @click="pickPrev(currentYear, currentMonth)">&#139</li>
+                <li class="year-month" @click="pickYear(currentYear, currentMonth)">
+                    <span class="choose-year">{{currentYear}}</span>
+                    <span class="choose-month">{{currentMonth}}</span>
+                </li>
+                <li class="arrow" @click="pickNext(currentYear, currentMonth)">&#155</li>
+            </ul>
+        </div>
+
+
+        <!--星期-->
+        <ul class="weekdays">
+            <li>一</li>
+            <li>二</li>
+            <li>三</li>
+            <li>四</li>
+            <li>五</li>
+            <li style="color: red">六</li>
+            <li style="color: red">日</li>
+        </ul>
+
+        <!--日期-->
+        <ul class="days">
+            <li @click="pick(day)" v-for="day in days">
+                <span v-if="day.getMonth()+1 != currentMonth" class="other-month">{{ day.getDate() }}</span>
+                <span v-else>
+                  <!--今天-->
+                  <span v-if="day.getFullYear() == new Date().getFullYear() && day.getMonth() == new Date().getMonth() && day.getDate() == new Date().getDate()" class="active">{{ day.getDate() }}</span>
+                <span v-else>{{ day.getDate() }}</span>
+                </span>
+            </li>
+        </ul>
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script src="js/vue-calender.js"></script>
+</body>
+
+</html>
